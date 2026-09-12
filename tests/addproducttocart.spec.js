@@ -5,7 +5,7 @@ import CartPage from '../pages/addtocart.js';
 //import fs from 'fs';
 import { productdata } from '../pages/productsortdata.js';
 import ProductSort from '../pages/product.js';
-import { takeScreenshot } from '../pages/screenshotHelper.js';
+import { takeScreenshot } from '../pages/screenshothelper.js';
 test.describe('Product Search Functionality',()=>{
 
 let loginpage;
@@ -113,7 +113,7 @@ await takeScreenshot(page,'Test5 - Step4 - Fill form on Page');
 
 })
 test('TC006 - Add multiple products to cart', async ({ page }) => {
-
+    console.log('TC006 URL:', page.url());
     await cartpage.addtocartmultipleproducts();
     await takeScreenshot(page, 'Test6 - Step1 - Add four products to cart');
     await cartpage.opencart();
