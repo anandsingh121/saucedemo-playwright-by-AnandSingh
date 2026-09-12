@@ -45,12 +45,20 @@ async addtocartmultipleproducts() {
     await expect(this.cartbadge).toHaveText(String(productsToAdd));
 }
 async removesomeprod()
-{ const productsToRemove = Math.min(2, await this.remvprod.count()); 
-    for(let i=1; i<=productsToRemove; i++)
-        { 
-            await this.remvprod.first().click();
-        } 
-        await expect(this.cartbadge).toHaveText(String(productsToRemove));
+{ const initialProductCount = await this.remvprod.count();
+    const productsToRemove = Math.min(2, initialProductCount);
+
+    for (let i = 0; i < productsToRemove; i++) {
+        await this.remvprod.first().click();
+    }
+
+    const remainingProducts = initialProductCount - productsToRemove;
+
+    if (remainingProducts === 0) {
+        await expect(this.cartbadge).not.toBeVisible();
+    } else {
+        await expect(this.cartbadge).toHaveText(String(remainingProducts));
+    }
     }
 }
 export default cartpage;
