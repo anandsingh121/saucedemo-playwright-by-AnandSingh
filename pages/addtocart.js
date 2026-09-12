@@ -35,9 +35,10 @@ async addmaxpriceproduct()
 async addminpriceproduct()
 { const prices = await this.productPrices.allTextContents(); const numericPrices = prices.map(price => parseFloat(price.replace('$', ''))); const minValue = Math.min(...numericPrices); const minIndex = numericPrices.indexOf(minValue); console.log('All prices:', numericPrices); console.log('Maximum price:', minValue); await this.addcartbtn.nth(minIndex).click(); }
 async addtocartmultipleproducts() {
-    const productCount = await this.addcartbtn.count();
-    const productsToAdd = Math.min(4, productCount);
-
+    //const productCount = await this.addcartbtn.count();
+    //console.log('productcount:',productCount);
+    const productsToAdd = 4;
+    console.log('productsToAdd:',productsToAdd);
     for (let i = 1; i <= productsToAdd; i++) {
         await this.addcartbtn.first().click();
     }
