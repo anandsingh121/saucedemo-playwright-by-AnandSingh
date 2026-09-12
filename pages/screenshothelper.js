@@ -1,15 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 
-export async function takeScreenshot(page, name) {
+export async function takeScreenshot(page, folderName, screenshotName) {
 
     const browserName = page.context().browser()?.browserType().name() ?? 'unknown-browser';
-    const folder = path.join('screenshots', 'addtocarteachsteps', browserName);
+    const folder = path.join('screenshots',folderName,browserName);
 
     fs.mkdirSync(folder, { recursive: true });
-
-    await page.screenshot({
-        path: path.join(folder, `${name}.png`),
+    const screenshotPath = path.join(
+        folder,
+        `${screenshotName}.png`
+    );
+        await page.screenshot({
+        path: screenshotPath,
         fullPage: true
     });
 }
